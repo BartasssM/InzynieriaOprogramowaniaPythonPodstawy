@@ -30,10 +30,20 @@ def check_parentheses(s: str) -> bool:
     Returns:
         bool: True jeśli nawiasy są poprawne, False w przeciwnym wypadku.
     """
-    ### TUTAJ PODAJ ROZWIĄZANIE ZADANIA
+    stos = []
 
-    ### return False - powinno być zmienione i zwrócić prawdziwy wynik (zgodny z oczekiwaniami)
-    return False
+    for znak in s:
+        if znak == '(':
+            stos.append(znak)  # Dodajemy na stos
+        elif znak == ')':
+            if not stos:
+                # Próbujemy zamknąć nawias, ale stos jest pusty (brak otwierającego)
+                return False
+            stos.pop()  # Zdejmujemy ze stosu poprawnie sparowany nawias
+
+    # Jeśli stos jest pusty na koniec, wszystko się zgadza.
+    # W przeciwnym razie zostały nam jakieś niezamknięte nawiasy otwierające.
+    return len(stos) == 0
 
 # Przykładowe wywołanie:
 if __name__ == "__main__":

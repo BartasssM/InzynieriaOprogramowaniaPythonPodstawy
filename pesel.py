@@ -28,10 +28,23 @@ def verify_pesel(pesel: str) -> int:
     Returns:
         int: 1 jeśli numer jest poprawny, 0 jeśli nie.
     """
-    ### TUTAJ PODAJ ROZWIĄZANIE ZADANIA
-
-    ### return 0 - powinno być zmienione i zwrócić prawdziwy wynik (zgodny z oczekiwaniami)
-    return 0
+    # Wagi dla pierwszych 10 cyfr numeru PESEL
+    wagi = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
+    
+    # Obliczenie sumy iloczynów cyfr i wag
+    suma = 0
+    for i in range(10):
+        suma += int(pesel[i]) * wagi[i]
+        
+    # Wyliczenie cyfry kontrolnej
+    reszta = suma % 10
+    cyfra_kontrolna = (10 - reszta) % 10
+    
+    # Porównanie z jedenastą cyfrą numeru PESEL
+    if int(pesel[10]) == cyfra_kontrolna:
+        return 1
+    else:
+        return 0
 
 
 # Przykładowe wywołanie:
